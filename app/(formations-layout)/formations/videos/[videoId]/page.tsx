@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import {
   Card,
   CardContent,
@@ -9,9 +10,21 @@ import Link from "next/link";
 import { VIDEOS } from "../../data";
 import { notFound } from "next/navigation";
 
-export default async function Page(props: {
+type Pageprops = {
   params: Promise<{ videoId: string }>;
-}) {
+};
+
+export const generateMetadata = async (props: Pageprops): Promise<Metadata> => {
+  const params = await props.params;
+
+  const video = VIDEOS.find((video) => video.id === params.videoId);
+
+  return {
+    title: `Video - ${video?.title}`,
+  };
+};
+
+export default async function Page(props: Pageprops) {
   const params = await props.params;
 
   const video = VIDEOS.find((video) => video.id === params.videoId);
@@ -23,7 +36,7 @@ export default async function Page(props: {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Plan de formation</CardTitle>
+        <CardTitle>Videos</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <ul className="list-disc list-inside">

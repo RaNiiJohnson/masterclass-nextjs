@@ -1,5 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Page() {
   return (
