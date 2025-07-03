@@ -1,12 +1,11 @@
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { VIDEOS } from "@app/formations/data";
+import { VIDEOS } from "@app/(formations-layout)/formations/data";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 

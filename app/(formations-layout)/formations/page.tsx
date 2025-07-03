@@ -1,4 +1,3 @@
-import { PageLayout } from "@/components/layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { VIDEOS } from "./data";
