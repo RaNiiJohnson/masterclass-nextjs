@@ -3,10 +3,14 @@ import { prisma } from "@/lib/prisma";
 import { Star } from "lucide-react";
 import { SelectStar } from "./select-star";
 import { revalidatePath } from "next/cache";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { UpdateTitleForm } from "./edit-title";
 
 export default async function Page() {
   const reviews = await prisma.review.findMany();
-  const setNewStar = async (reviewId: string, star: number) => {
+
+  const setReviewStar = async (reviewId: string, star: number) => {
     "use server";
     await prisma.review.update({
       where: {
@@ -14,6 +18,21 @@ export default async function Page() {
       },
       data: {
         star,
+      },
+    });
+
+    revalidatePath("/courses");
+  };
+
+  const setReviewName = async (reviewId: string, name: string) => {
+    "use server";
+
+    await prisma.review.update({
+      where: {
+        id: reviewId,
+      },
+      data: {
+        name,
       },
     });
 
@@ -32,11 +51,16 @@ export default async function Page() {
               <CardHeader>
                 <div className="flex items-center gap-1 mb-1">
                   <SelectStar
-                    setNewStar={setNewStar.bind(null, review.id)}
+                    setNewStar={setReviewStar.bind(null, review.id)}
                     star={review.star}
                   />
                 </div>
-                <CardTitle>{review.name}</CardTitle>
+                <UpdateTitleForm
+                  setTitle={setReviewName.bind(null, review.id)}
+                  className="text-lg font-bold"
+                >
+                  {review.name}
+                </UpdateTitleForm>
               </CardHeader>
               <CardContent>{review.review}</CardContent>
             </Card>

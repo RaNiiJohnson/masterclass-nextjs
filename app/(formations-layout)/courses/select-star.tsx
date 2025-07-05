@@ -37,7 +37,7 @@ export const SelectStar = (props: {
                 "-translate-0.5 fill-orange-400 text-orange-400": isNewFilled,
               })}
               style={{
-                transitionDelay: `${i * 0.1}s`,
+                transitionDelay: `0.1s`,
               }}
             />
           </button>
