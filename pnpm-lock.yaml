@@ -41,6 +41,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      next-zod-route:
+        specifier: ^0.2.6
+        version: 0.2.6
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -1822,6 +1825,10 @@ packages:
     peerDependencies:
       react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
       react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+
+  next-zod-route@0.2.6:
+    resolution: {integrity: sha512-M6i497y10YIab1uMEw38aP4QJObqRmRjjs/sjQiMDg4Q8EZBe2k16RPwZyBRLsS+4IjEdoUC8rtXiv5A8FhOUw==}
+    engines: {node: '>=18'}
 
   next@15.3.3:
     resolution: {integrity: sha512-JqNj29hHNmCLtNvd090SyRbXJiivQ+58XjCcrC50Crb5g5u2zi7Y2YivbsEfzk6AtVI80akdOQbaMZwWB1Hthw==}
@@ -4075,6 +4082,10 @@ snapshots:
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
+
+  next-zod-route@0.2.6:
+    dependencies:
+      zod: 3.25.76
 
   next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
