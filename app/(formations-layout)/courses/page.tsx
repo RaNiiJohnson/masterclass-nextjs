@@ -51,12 +51,12 @@ export default async function Page() {
               <CardHeader>
                 <div className="flex items-center gap-1 mb-1">
                   <SelectStar
-                    setNewStar={setReviewStar.bind(null, review.id)}
+                    onStarChange={setReviewStar.bind(null, review.id)}
                     star={review.star}
                   />
                 </div>
                 <UpdateTitleForm
-                  setTitle={setReviewName.bind(null, review.id)}
+                  onTitleChange={setReviewName.bind(null, review.id)}
                   className="text-lg font-bold"
                 >
                   {review.name}
