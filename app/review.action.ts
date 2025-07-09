@@ -4,14 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { actionClient, SafeError } from "@/lib/safe-action";
 import { revalidatePath } from "next/cache";
 import z from "zod";
-
-const inputSchema = z.object({
-  name: z.string(),
-  review: z.string(),
-});
+import { ReviewFormSchema } from "./review.schema";
 
 export const addReviewSafeAction = actionClient
-  .inputSchema(inputSchema)
+  .inputSchema(ReviewFormSchema)
   .action(async ({ parsedInput: input }) => {
     if (input.name === "mechant") {
       throw new SafeError("invalid name");
