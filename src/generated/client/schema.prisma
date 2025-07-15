@@ -9,10 +9,14 @@ datasource db {
 }
 
 model Review {
-  id        String   @id @default(cuid())
-  name      String
-  review    String
-  star      Int
+  id     String @id @default(cuid())
+  name   String
+  review String
+  star   Int
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
@@ -27,6 +31,7 @@ model User {
   updatedAt     DateTime
   accounts      Account[]
   sessions      Session[]
+  reviews       Review[]
 
   @@map("user")
 }

@@ -18,6 +18,7 @@ import { signIn } from "@/lib/auth-client";
 import { Github } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const SignInFormSchema = z.object({
   email: z.string().email({
@@ -99,7 +100,16 @@ export function SignInForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <div className="flex items-center gap-2">
+                  <FormLabel>Password</FormLabel>
+                  <div className="flex-1"></div>
+                  <Link
+                    className="text-indigo-500 text-sm"
+                    href="/auth/forget-password"
+                  >
+                    Forget Password
+                  </Link>
+                </div>
                 <FormControl>
                   <Input type="password" placeholder="" {...field} />
                 </FormControl>

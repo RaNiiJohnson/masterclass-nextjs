@@ -9,35 +9,36 @@ import Link from "next/link";
 import { UpdateTitleForm } from "../(formations-layout)/courses/edit-title";
 import { SelectStar } from "../(formations-layout)/courses/select-star";
 import { ReviewForm } from "./review-form";
+import { deleteReviewAction, updateReviewAction } from "./review.action";
+import { getUser } from "@/lib/auth-server";
 
 export default async function Home() {
-  const reviews = await prisma.review.findMany();
+  const user = await getUser();
+  const reviews = await prisma.review.findMany({
+    where: {
+      userId: user?.id,
+    },
+  });
 
   const changeStar = async (reviewId: string, star: number) => {
     "use server";
 
-    await prisma.review.update({
-      where: {
-        id: reviewId,
-      },
-      data: {
-        star,
-      },
+    await updateReviewAction({
+      reviewId,
+      star,
     });
+
     revalidatePath("/");
   };
 
   const changeName = async (reviewId: string, name: string) => {
     "use server";
 
-    await prisma.review.update({
-      where: {
-        id: reviewId,
-      },
-      data: {
-        name,
-      },
+    await updateReviewAction({
+      reviewId,
+      name,
     });
+
     revalidatePath("/");
   };
 
@@ -57,11 +58,8 @@ export default async function Home() {
                   formAction={async () => {
                     "use server";
 
-                    await prisma.review.delete({
-                      where: {
-                        id: review.id,
-                      },
-                    });
+                    await deleteReviewAction({ reviewId: review.id });
+
                     revalidatePath("/");
                   }}
                   size="sm"
